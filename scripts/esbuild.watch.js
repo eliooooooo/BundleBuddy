@@ -4,8 +4,8 @@ const postCssPlugin = require('esbuild-style-plugin');
 (async () => {
   let ctx = await esbuild.context({
     logLevel: 'debug',
-    entryPoints: ['./assets/app.js'],
-    outdir: 'dist',
+    entryPoints: ['./public/assets/js/main.js'],
+    outdir: '/public/dist',
     bundle: true, 
     minify: false,
     loader: {
