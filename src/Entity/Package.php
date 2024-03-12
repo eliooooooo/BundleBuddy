@@ -43,9 +43,13 @@ class Package
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'packages')]
     private Collection $category;
 
+    #[ORM\ManyToMany(targetEntity: Panier::class, mappedBy: 'package')]
+    private Collection $paniers;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->paniers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,6 +173,33 @@ class Package
     public function removeCategory(Category $category): static
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): static
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers->add($panier);
+            $panier->addPackage($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): static
+    {
+        if ($this->paniers->removeElement($panier)) {
+            $panier->removePackage($this);
+        }
 
         return $this;
     }
