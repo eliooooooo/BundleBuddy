@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ package.image }}</td>
+                <td><img class="vignette" src="{{ asset('uploads/'~package.image) }}" alt="{{ package.name }}"></td>
             </tr>
         </tbody>
     </table>

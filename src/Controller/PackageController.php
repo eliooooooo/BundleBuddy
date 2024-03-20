@@ -33,12 +33,12 @@ class PackageController extends AbstractController
             $image = $form->get('image')->getData();
         
             if ($image) {
-                $package->setPicture("tmp"); 
+                $package->setImage("tmp"); 
                 $entityManager->persist($package);
                 $entityManager->flush();
 
                 $filename = 'image-'.$package->getId().'.'.$image->guessExtension();
-                $package->setPicture($filename);
+                $package->setImage($filename);
                 $image->move('uploads', $filename);
             }
             // Enregistrement final (si aucun fichier n'est envoyé ou pour mettre à jour le nom du ficher)
@@ -69,8 +69,19 @@ class PackageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('fichier-image')->getData();
+        
+            if ($image) {
+                if (file_exists('uploads/' . $package->getImage()))
+                    unlink('uploads/' . $package->getImage());
+        
+                $filename = 'image-'.$package->getId().'.'.$image->guessExtension();
+                $package->setImage($filename);
+                $image->move('uploads', $filename);
+            }
+            $entityManager->persist($package);
             $entityManager->flush();
-
+        
             return $this->redirectToRoute('app_package_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -84,6 +95,8 @@ class PackageController extends AbstractController
     public function delete(Request $request, Package $package, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$package->getId(), $request->request->get('_token'))) {
+            if (file_exists('uploads/' . $package->getImage()))
+                unlink('uploads/' . $package->getImage());
             $entityManager->remove($package);
             $entityManager->flush();
         }

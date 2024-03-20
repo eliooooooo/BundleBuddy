@@ -20,21 +20,20 @@
                     <ul class="mainMenu">
                         <li><a href="{{ path('app_package_index') }}">All packages</a></li>
                         <li><a href="{{ path('app_category_index') }}">All category</a></li>
-                    </ul>
-                    <ul class="secondMenu">
-                        <li><div class="searchBar"></div></li>
-                        {% if app.user %}
-                            <strong>{{ app.user.username }}</strong>
-                            <a href="{{ path('app_logout') }}">Logout</a>
-                        {% else %}
-                            <a href="{{ path('app_login') }}">Login</a>
-                        {% endif %}
+                        <li>
+                            {% if app.user %}
+                                <strong>{{ app.user.username }}</strong>
+                                <a href="{{ path('app_logout') }}">Logout</a>
+                            {% else %}
+                                <a href="{{ path('app_login') }}">Login</a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </nav>
             </div>
         </header>
 
-        <main>
+        <main class="container">
         {% block body %}{% endblock %}
         </main>
 
