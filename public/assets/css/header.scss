@@ -1,0 +1,24 @@
+.headerMenu {
+    @apply flex flex-col w-full justify-end items-center bg-white shadow-md;
+    .headerSeparation {
+        @apply h-2 w-full;
+        background: rgb(230,220,130);
+        background: linear-gradient(90deg, rgba(230,220,130,1) 0%, rgba(216,58,36,1) 35%, rgba(230,220,130,1) 100%);
+    }
+    .containerMenu {
+        @apply flex flex-row w-full justify-between ;
+        nav {
+            @apply flex items-center;
+        }
+        .mainMenu {
+            @apply m-0 list-none justify-end flex flex-row gap-4 py-4 px-10 border-b-2 border-black;
+            a {
+                @apply text-black no-underline;
+            }
+        }
+    }
+
+    .logo {
+        @apply ml-4 max-w-[50px] py-2;
+    }
+}

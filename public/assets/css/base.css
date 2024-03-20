@@ -1,0 +1,13 @@
+@import './header.scss';
+@import './container.scss';
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    max-width: 100vw;
+}
+
+header {
+    background-color: aqua;
+}
