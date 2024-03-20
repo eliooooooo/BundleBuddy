@@ -30,9 +30,21 @@ class PackageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+        
+            if ($image) {
+                $package->setPicture("tmp"); 
+                $entityManager->persist($package);
+                $entityManager->flush();
+
+                $filename = 'image-'.$package->getId().'.'.$image->guessExtension();
+                $package->setPicture($filename);
+                $image->move('uploads', $filename);
+            }
+            // Enregistrement final (si aucun fichier n'est envoyé ou pour mettre à jour le nom du ficher)
             $entityManager->persist($package);
             $entityManager->flush();
-
+        
             return $this->redirectToRoute('app_package_index', [], Response::HTTP_SEE_OTHER);
         }
 
