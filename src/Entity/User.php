@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,6 +35,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\ManyToMany(targetEntity: Panier::class, inversedBy: 'users')]
+    private Collection $Panier;
+
+    public function __construct()
+    {
+        $this->Panier = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,5 +117,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPanier(): Collection
+    {
+        return $this->Panier;
+    }
+
+    public function addPanier(Panier $panier): static
+    {
+        if (!$this->Panier->contains($panier)) {
+            $this->Panier->add($panier);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): static
+    {
+        $this->Panier->removeElement($panier);
+
+        return $this;
     }
 }

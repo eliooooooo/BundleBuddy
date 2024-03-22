@@ -18,9 +18,13 @@ class Panier
     #[ORM\ManyToMany(targetEntity: Package::class, inversedBy: 'paniers')]
     private Collection $package;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Panier')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->package = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,6 +52,33 @@ class Panier
     public function removePackage(Package $package): static
     {
         $this->package->removeElement($package);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removePanier($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\Package;
 use App\Form\PanierType;
 use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,15 @@ class PanierController extends AbstractController
         return $this->render('panier/index.html.twig', [
             'paniers' => $panierRepository->findAll(),
         ]);
+    }
+
+    #[Route('/add/{id}', name: 'app_panier_add', methods: ['GET', 'POST'])]
+    public function add(Request $request, Package $package, Panier $panier, EntityManagerInterface $entityManager): Response
+    {
+        $panier->addPackage($package);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/new', name: 'app_panier_new', methods: ['GET', 'POST'])]
