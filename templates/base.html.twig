@@ -5,6 +5,7 @@
         <title>{% block title %}Bundle Buddy{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         <link rel="stylesheet" href="{{ asset('dist/main.css') }}">
+        <script src="{{ asset('dist/main.js') }}" ></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -26,6 +27,7 @@
                         <li></li>
                         <li><a href="{{ path('app_package_index') }}">All packages</a></li>
                         <li><a href="{{ path('app_category_index') }}">All category</a></li>
+                        <li><a href="{{ path('app_panier_index') }}">Cart</a></li>
                         <li>
                             {% if app.user %}
                                 <strong>{{ app.user.username }}</strong>
@@ -43,6 +45,5 @@
         {% block body %}{% endblock %}
         </main>
 
-        <script href="/public/dist/main.js" ></script>
     </body>
 </html>

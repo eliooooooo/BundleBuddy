@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use GuzzleHttp\Client;
+use Michelf\Markdown;
 use App\Entity\Package;
 use App\Form\PackageType;
 use App\Repository\PackageRepository;
@@ -57,8 +59,26 @@ class PackageController extends AbstractController
     #[Route('/{id}', name: 'app_package_show', methods: ['GET'])]
     public function show(Package $package): Response
     {
+        $client = new Client();
+
+        $url = $package->getRepository();
+        $parsedUrl = parse_url($url);
+        $path = $parsedUrl['path'];
+        $segments = explode('/', $path);
+
+        $user = $segments[1];
+        $repo = $segments[2];
+
+        $response = $client->request('GET', 'https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/README.md');
+    
+        $markdown = $response->getBody()->getContents();
+        $html = Markdown::defaultTransform($markdown);
+        $html = preg_replace('/src="(\.\/[^"]*)"/', 'src="https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/$1"', $html);
+        $html = preg_replace('/srcset="(\.\/[^"]*)"/', 'src="https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/$1"', $html);
+
         return $this->render('package/show.html.twig', [
             'package' => $package,
+            'readme' => $html,
         ]);
     }
 
