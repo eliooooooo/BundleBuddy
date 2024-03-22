@@ -18,13 +18,16 @@ class Panier
     #[ORM\ManyToMany(targetEntity: Package::class, inversedBy: 'paniers')]
     private Collection $package;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Panier')]
-    private Collection $users;
+    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'panier', cascade: ['persist', 'remove'])]
+    private $user;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
 
     public function __construct()
     {
         $this->package = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,28 +59,18 @@ class Panier
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): static
+    public function setUser(User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addPanier($this);
-        }
+        $this->user = $user;
 
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removePanier($this);
+        // set the owning side of the relation if necessary
+        if ($user->getPanier() !== $this) {
+            $user->setPanier($this);
         }
 
         return $this;

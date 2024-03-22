@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\User;
 use App\Entity\Package;
 use App\Form\PanierType;
 use App\Repository\PanierRepository;
@@ -11,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/panier')]
 class PanierController extends AbstractController
@@ -24,9 +26,21 @@ class PanierController extends AbstractController
     }
 
     #[Route('/add/{id}', name: 'app_panier_add', methods: ['GET', 'POST'])]
-    public function add(Request $request, Package $package, Panier $panier, EntityManagerInterface $entityManager): Response
+    public function add(Request $request, Package $package, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
+
+        $panier = $user->getPanier();
+        if ($panier === null) {
+            $panier = new Panier();
+            $user->setPanier($panier);
+            $panier->setUser($user);
+            $entityManager->persist($panier);
+            $entityManager->persist($user);
+        }
+
         $panier->addPackage($package);
+
         $entityManager->flush();
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);

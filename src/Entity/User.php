@@ -36,12 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: Panier::class, inversedBy: 'users')]
-    private Collection $Panier;
+    #[ORM\OneToOne(targetEntity: Panier::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private $panier;
 
     public function __construct()
     {
-        $this->Panier = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,26 +118,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, Panier>
-     */
-    public function getPanier(): Collection
+    public function getPanier(): ?Panier
     {
-        return $this->Panier;
+        return $this->panier;
     }
 
-    public function addPanier(Panier $panier): static
+    public function setPanier(Panier $panier): self
     {
-        if (!$this->Panier->contains($panier)) {
-            $this->Panier->add($panier);
+        // set the owning side of the relation if necessary
+        if ($panier->getUser() !== $this) {
+            $panier->setUser($this);
         }
 
-        return $this;
-    }
-
-    public function removePanier(Panier $panier): static
-    {
-        $this->Panier->removeElement($panier);
+        $this->panier = $panier;
 
         return $this;
     }
