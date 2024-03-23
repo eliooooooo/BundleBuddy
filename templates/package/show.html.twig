@@ -9,16 +9,16 @@
             <div class="readme">
                 <div class="title">Readme</div>
                 <div class="content">
-                    {{ readme|raw }}
+                    {% if readme %}{{ readme|raw }}{% else %}No content found on the repository{% endif %}
                 </div>
             </div>
             <div class="package-infos">
                 <h2>{{ package.name }}</h2>
+                <p class="version">Version {{ package.version }}</p>
                 <p>{{ package.description }}</p>
-                <p>Version : {{ package.version }}</p>
-                <p>Size : {{ package.size }}</p>
-                <p>Documentation : <a href="{{ package.documentation }}">{{ package.documentation }}</a></p>
-                <p>Repository : <a href="{{ package.repository }}">{{ package.repository }}</a></p>
+                <p>Size : <span class="size">{{ package.size }} KB</span></p>
+                <p>Documentation : <br><a href="{{ package.documentation }}">{{ package.documentation }}</a></p>
+                <p>Repository : <br><a href="{{ package.repository }}">{{ package.repository }}</a></p>
                 <div class="code">
                     <code id="install">npm i {{ package.install }}</code>
                     <button class="copy" id="copy">
@@ -27,7 +27,7 @@
                         </svg>
                     </button>
                 </div>
-                <a href="{{ path('app_panier_add', {'id': package.id}) }}">Ajouter à mon Bundle</a>      
+                <a class="button" href="{{ path('app_panier_add', {'id': package.id}) }}">Ajouter à mon Bundle</a>      
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">

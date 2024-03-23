@@ -14,15 +14,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'User' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
-                    // Ajoutez d'autres rôles si nécessaire
-                ],
-                'multiple' => true,
-                'expanded' => true,
-            ])
+            // ->add('roles', ChoiceType::class, [
+            //     'choices' => [
+            //         'User' => 'ROLE_USER',
+            //         'Admin' => 'ROLE_ADMIN',
+            //     ],
+            //     'multiple' => true,
+            //     'expanded' => true,
+            // ])
             ->add('password')
         ;
     }

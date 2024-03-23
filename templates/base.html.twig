@@ -27,7 +27,8 @@
                         <li></li>
                         <li><a href="{{ path('app_package_index') }}">All packages</a></li>
                         <li><a href="{{ path('app_category_index') }}">All category</a></li>
-                        <li><a href="{{ path('app_panier_index') }}">Cart</a></li>
+
+                        <li><a href="{% if app.user %}{{ path('app_panier_show', {id: app.user.id}) }}{% else %}{{ path('app_login') }}{% endif %}" class="{% if app.user == NULL %} inactive {% endif %}" >My bundle</a></li>
                         <li>
                             {% if app.user %}
                                 <strong>{{ app.user.username }}</strong>
@@ -44,6 +45,23 @@
         <main class="container-page">
         {% block body %}{% endblock %}
         </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footerMenu">
+                    <nav>
+                        <ul>
+                            <li><a href="{{ path('index') }}">Home</a></li>
+                            <li><a href="{{ path('app_package_index') }}">All packages</a></li>
+                            <li><a href="{{ path('app_category_index') }}">All category</a></li>
+                            <li>-</li>
+                            <li>Bundle Buddy 2024</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="socket"></div>
+        </footer>
 
     </body>
 </html>
