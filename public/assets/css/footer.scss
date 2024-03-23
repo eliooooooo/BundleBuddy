@@ -1,0 +1,25 @@
+.footer {
+    @apply mt-10 bg-white block pt-1;
+    box-shadow: 5px 10px 10px 5px #000000;
+    .footerMenu {
+        ul {
+            @apply flex flex-row gap-4 justify-center list-none;
+            li {
+                @apply text-black;
+                a {
+                    @apply no-underline;
+                    color: rgba(216,58,36,1);
+                    &:hover {
+                        @apply opacity-75;
+                    }
+                }
+            }
+        }
+    }
+    .socket {
+        @apply h-2 w-full;
+        background: rgba(216,58,36,1);
+        background: linear-gradient(90deg, rgba(230,220,130,1) 0%, rgba(216,58,36,1) 35%, rgba(230,220,130,1) 100%);
+    }
+
+}
