@@ -2,6 +2,7 @@
 @import './footer.scss';
 @import './container.scss';
 @import './package.scss';
+@import './panier.scss';
 
 body, html {
     margin: 0;

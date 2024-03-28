@@ -69,8 +69,11 @@ class PanierController extends AbstractController
     #[Route('/{id}', name: 'app_panier_show', methods: ['GET'])]
     public function show(Panier $panier): Response
     {
+        $packages = $panier->getPackage();
+        
         return $this->render('panier/show.html.twig', [
             'panier' => $panier,
+            'packages' => $packages,
         ]);
     }
 

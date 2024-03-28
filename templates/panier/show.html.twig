@@ -14,6 +14,28 @@
         </tbody>
     </table>
 
+    <div class="package-json">
+        <span>{</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;"name": "my-bundle",</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;"private": true</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;"dependencies": {</span>
+        {% for package in packages %}
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"{{ package.name }}": "^{{ package.version }}",</span>
+        {% endfor %}
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+        <span>}</span>
+    </div>
+
+    {% for package in packages %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ package.name }}</h5>
+                <p class="card-text">{{ package.description }}</p>
+                <a href="{{ path('app_package_show', {'id': package.id}) }}" class="btn btn-primary">Voir</a>
+            </div>
+        </div>
+    {% endfor %}
+
     <a href="{{ path('app_panier_index') }}">back to list</a>
 
     <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
