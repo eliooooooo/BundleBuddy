@@ -15,15 +15,7 @@
     </table> #}
 
     <div class="package-json">
-        <span>{</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;"name": "my-bundle",</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;"private": true</span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;"dependencies": {</span>
-        {% for package in packages %}
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"{{ package.name }}": "^{{ package.version }}",</span>
-        {% endfor %}
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;}</span>
-        <span>}</span>
+        <pre>{{ packageJson|raw }}</pre>
     </div>
 
     {# <a href="{{ path('app_panier_index') }}">back to list</a> #}
