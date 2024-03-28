@@ -46,6 +46,23 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/remove/{id}', name: 'app_panier_remove', methods: ['GET', 'POST'])]
+    public function remove(Request $request, Package $package, EntityManagerInterface $entityManager, Security $security): Response
+    {
+        $user = $security->getUser();
+
+        $panier = $user->getPanier();
+        if ($panier === null) {
+            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        $panier->removePackage($package);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/new', name: 'app_panier_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
