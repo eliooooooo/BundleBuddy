@@ -5,14 +5,14 @@
 {% block body %}
     <h1>Panier</h1>
 
-    <table class="table">
+    {# <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ panier.id }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
 
     <div class="package-json">
         <span>{</span>
@@ -26,19 +26,9 @@
         <span>}</span>
     </div>
 
-    {% for package in packages %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ package.name }}</h5>
-                <p class="card-text">{{ package.description }}</p>
-                <a href="{{ path('app_package_show', {'id': package.id}) }}" class="btn btn-primary">Voir</a>
-            </div>
-        </div>
-    {% endfor %}
+    {# <a href="{{ path('app_panier_index') }}">back to list</a> #}
 
-    <a href="{{ path('app_panier_index') }}">back to list</a>
+    {# <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a> #}
 
-    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
-
-    {{ include('panier/_delete_form.html.twig') }}
+    {# {{ include('panier/_delete_form.html.twig') }} #}
 {% endblock %}
