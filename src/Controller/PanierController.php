@@ -70,6 +70,7 @@ class PanierController extends AbstractController
     public function show(Panier $panier): Response
     {
         $packages = $panier->getPackage();
+        $weight = 0;
 
         $packageJson = [
             'name' => 'my-bundle',
@@ -79,11 +80,14 @@ class PanierController extends AbstractController
 
         foreach ($packages as $package) {
             $packageJson['dependencies'][$package->getName()] = "^".$package->getVersion();
+            $weight += $package->getSize();
         }
         
         return $this->render('panier/show.html.twig', [
             'panier' => $panier,
+            'packages' => $packages,
             'packageJson' => json_encode($packageJson, JSON_PRETTY_PRINT),
+            'weight' => $weight,
         ]);
     }
 

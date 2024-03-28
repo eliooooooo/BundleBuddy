@@ -1,3 +1,27 @@
-.package-json {
-    @apply flex flex-col gap-1;
+.bundle {
+    @apply flex flex-row gap-4 mt-4;
+    .package-json {
+        @apply border border-solid border-gray-400 rounded-sm w-full;
+        .title {
+            @apply flex border-0 border-b border-solid border-gray-400 font-bold p-2;
+        }
+        .content {
+            @apply p-4;
+            img {
+                @apply max-w-full;
+            }
+        }
+    }
+    .package-info {
+        @apply flex flex-col gap-4 p-4 w-full max-w-[350px] h-fit relative;
+        h2, p {
+            @apply m-0;
+        }
+        .button-admin {
+            @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md;
+        }
+        .number, .size {
+            color: rgba(216,58,36,1);
+        }    
+    }
 }
