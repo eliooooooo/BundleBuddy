@@ -1,6 +1,9 @@
 .footer {
     @apply mt-10 bg-white block pt-1;
     box-shadow: 5px 10px 10px 5px #000000;
+    .footerList {
+        @apply h-[42px];
+    }
     .footerMenu {
         ul {
             @apply flex flex-row gap-4 justify-center list-none;
