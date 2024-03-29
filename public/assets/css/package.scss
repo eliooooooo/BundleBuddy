@@ -1,5 +1,8 @@
 .container-packages {
     @apply flex flex-row flex-wrap justify-center items-stretch gap-4;
+    &.list {
+        @apply flex-col;
+    }
         .package {
             @apply flex flex-col justify-between relative w-[300px] bg-white shadow-md p-4;
             .cta {
@@ -30,6 +33,46 @@
             &.package-admin {
                 a {
                     @apply flex flex-col items-center justify-center h-full no-underline gap-4 text-black;
+                }
+            }
+        }
+        .package-list {
+            .image {
+                @apply flex items-center w-full max-w-[30%];
+                img {
+                    @apply w-auto max-h-full mx-auto block;
+                }
+            }
+                
+            @apply relative flex flex-row gap-4 justify-start w-full max-w-[960px] mx-auto relative bg-white shadow-md p-4;
+            .align {
+                @apply flex flex-col gap-4 items-start;
+            }
+            .cta {
+                @apply flex flex-col items-center gap-4 text-white p-4 w-fit no-underline shadow-md;
+                background-color: rgba(216,58,36,1);
+            }
+            .container-tip {
+                @apply flex flex-row gap-2 items-center justify-end;
+                .tip {
+                    @apply text-white px-2 w-fit rounded-full; 
+                    background-color: rgba(216,58,36,1);
+                }
+            }
+            .align-title {
+                h2 {
+                    @apply text-2xl font-bold mt-2 mb-2;
+                }
+                @apply flex flex-row gap-4 items-center;
+            }
+            .button-admin {
+                @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md;
+                border: 1px solid black;
+            }
+
+            &.package-admin {
+                a {
+                    @apply flex flex-col items-center justify-center h-full no-underline gap-4 text-black mx-auto;
                 }
             }
         }

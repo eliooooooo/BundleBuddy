@@ -17,10 +17,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class PackageController extends AbstractController
 {
     #[Route('/', name: 'app_package_index', methods: ['GET'])]
-    public function index(PackageRepository $packageRepository): Response
+    public function index(PackageRepository $packageRepository, Request $request): Response
     {
+        $display = $request->query->get('display');
+        $display = $display ? $display : 'vignette';
+
         return $this->render('package/index.html.twig', [
             'packages' => $packageRepository->findAll(),
+            'display' => $display
         ]);
     }
 
