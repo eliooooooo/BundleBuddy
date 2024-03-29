@@ -43,15 +43,17 @@ class PanierController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_panier_show', ['id' => $panier->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/remove/{id}', name: 'app_panier_remove', methods: ['GET', 'POST'])]
     public function remove(Request $request, Package $package, EntityManagerInterface $entityManager, Security $security): Response
     {
         $user = $security->getUser();
+        // dd($user);
 
         $panier = $user->getPanier();
+        // dd($panier);
         if ($panier === null) {
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -60,7 +62,7 @@ class PanierController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_panier_show', ['id' => $panier->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/new', name: 'app_panier_new', methods: ['GET', 'POST'])]

@@ -37,9 +37,6 @@
                 h2, p {
                     @apply m-0;
                 }
-                .button-admin {
-                    @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md;
-                }
                 .number, .size {
                     color: rgba(216,58,36,1);
                 }    

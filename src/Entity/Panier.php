@@ -18,12 +18,12 @@ class Panier
     #[ORM\ManyToMany(targetEntity: Package::class, inversedBy: 'paniers')]
     private Collection $package;
 
-    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'panier', cascade: ['persist', 'remove'])]
-    private $user;
+    // #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'panier', cascade: ['persist', 'remove'])]
+    // private $user;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $User = null;
+    private ?User $user = null;
 
     public function __construct()
     {
