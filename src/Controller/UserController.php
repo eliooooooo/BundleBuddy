@@ -33,7 +33,6 @@ class UserController extends AbstractController
     
         if ($form->isSubmitted() && $form->isValid()) {
             $panier = new Panier();
-            $panier->setUser($user);
             $user->setPassword(
                 $passwordHasher->hashPassword(
                     $user,
@@ -41,12 +40,14 @@ class UserController extends AbstractController
                 )
             );
             $user->setPanier($panier);
-    
+            $user->setRoles(['ROLE_USER']);
+            $panier->setUser($user);
+
             $entityManager->persist($user);
             $entityManager->persist($panier);
             $entityManager->flush();
-    
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
         }
     
         return $this->render('user/new.html.twig', [
