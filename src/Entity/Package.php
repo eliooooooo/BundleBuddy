@@ -46,6 +46,9 @@ class Package
     #[ORM\ManyToMany(targetEntity: Panier::class, mappedBy: 'package')]
     private Collection $paniers;
 
+    #[ORM\Column(length: 255)]
+    private ?string $language = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -200,6 +203,18 @@ class Package
         if ($this->paniers->removeElement($panier)) {
             $panier->removePackage($this);
         }
+
+        return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(string $language): static
+    {
+        $this->language = $language;
 
         return $this;
     }
