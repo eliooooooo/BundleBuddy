@@ -5,7 +5,15 @@
         .package-json {
             @apply border border-solid border-gray-400 rounded-sm w-full;
             .title {
-                @apply flex border-0 border-b border-solid border-gray-400 font-bold p-2;
+                @apply flex justify-between border-0 border-b border-solid border-gray-400 font-bold p-2;
+                width: calc(100% - 16px);
+            }
+            .button-dl {
+                @apply flex flex-row gap-4 items-center no-underline w-fit cursor-pointer;
+                color: rgba(216,58,36,1);
+                &:hover {
+                    @apply opacity-75;
+                }
             }
             .content {
                 @apply p-4;
