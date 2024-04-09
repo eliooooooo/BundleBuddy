@@ -7,7 +7,7 @@
     <div class="filter-container">
         <form action="{{ path('app_package_index', app.request.query.all) }}" method="get" id="form-filter" class="languages-select">
             <div class="group-form">
-                <label>Language :</label>
+                <label>Languages :</label>
                 <select name="language" id="language">
                     <option value="all" selected>-- All languages --</option>
                     {% for lang in languages %}
@@ -58,7 +58,7 @@
                 </div>
                 <span class="align-title" ><h2>{{ package.name }}</h2> {{ package.version }} </span>
                 <p>{{ package.description|length > 120 ? package.description|slice(0, 120) ~ '...' : package.description }}</p>
-                <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Découvrir le package</a>
+                <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Discover the package</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">
@@ -80,7 +80,7 @@
                     {% endfor %}
                     </div>
                     <p>{{ package.description|length > 250 ? package.description|slice(0, 250) ~ '...' : package.description }}</p>
-                    <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Découvrir le package</a>
+                    <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Discover the package</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">
@@ -103,46 +103,4 @@
         </div>
     {% endif %}
     </div>
-
-    {# <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Version</th>
-                <th>Description</th>
-                <th>Documentation</th>
-                <th>Repository</th>
-                <th>Size</th>
-                <th>Install</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for package in packages %}
-            <tr>
-                <td>{{ package.id }}</td>
-                <td>{{ package.name }}</td>
-                <td>{{ package.version }}</td>
-                <td>{{ package.description }}</td>
-                <td>{{ package.documentation }}</td>
-                <td>{{ package.repository }}</td>
-                <td>{{ package.size }}</td>
-                <td>{{ package.install }}</td>
-                <td>{{ package.image }}</td>
-                <td>
-                    <a href="{{ path('app_package_show', {'id': package.id}) }}">show</a>
-                    <a href="{{ path('app_package_edit', {'id': package.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table> #}
-
-    {# <a href="{{ path('app_package_new') }}">Create new</a> #}
 {% endblock %}

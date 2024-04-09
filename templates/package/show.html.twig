@@ -27,7 +27,7 @@
                         </svg>
                     </button>
                 </div>
-                <a class="button" href="{{ path('app_panier_add', {'id': package.id}) }}">Ajouter à mon Bundle</a>      
+                <a class="button" href="{{ path('app_panier_add', {'id': package.id}) }}">Add to my Bundle</a>      
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">
@@ -38,51 +38,4 @@
             </div>
         </div>
     </div>
-
-    {# <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ package.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ package.name }}</td>
-            </tr>
-            <tr>
-                <th>Version</th>
-                <td>{{ package.version }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ package.description }}</td>
-            </tr>
-            <tr>
-                <th>Documentation</th>
-                <td>{{ package.documentation }}</td>
-            </tr>
-            <tr>
-                <th>Repository</th>
-                <td>{{ package.repository }}</td>
-            </tr>
-            <tr>
-                <th>Size</th>
-                <td>{{ package.size }}</td>
-            </tr>
-            <tr>
-                <th>Install</th>
-                <td>{{ package.install }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><img class="vignette" src="{{ asset('uploads/'~package.image) }}" alt="{{ package.name }}"></td>
-            </tr>
-        </tbody>
-    </table> #}
-
-    {# <a href="{{ path('app_package_index') }}">back to list</a>
-
-    <a href="{{ path('app_package_edit', {'id': package.id}) }}">edit</a> #}
-
-    {# {{ include('package/_delete_form.html.twig') }} #}
 {% endblock %}

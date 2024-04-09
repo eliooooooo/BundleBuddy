@@ -40,19 +40,13 @@
         </div>
         <div class="package-info">
             <h2>My bundle</h2>
-            <p>Ajoutez des packages pour construire votre build npm !</p>
+            <p>Add packages to build your npm build!</p>
             <div class="content">
                 <ul>
-                    <li>Nombre de packages : <span class="number">{{ packages|length }}</span></li>
-                    <li>Poids du package : <span class="size" >{{ weight }} KB</span></li>
+                    <li>Number of packages : <span class="number">{{ packages|length }}</span></li>
+                    <li>Package weight : <span class="size" >{{ weight }} KB</span></li>
                 </ul>
             </div>
         </div>
     </div>
-
-    {# <a href="{{ path('app_panier_index') }}">back to list</a> #}
-
-    {# <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a> #}
-
-    {# {{ include('panier/_delete_form.html.twig') }} #}
 {% endblock %}
