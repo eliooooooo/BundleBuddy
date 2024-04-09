@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Packages - ({{ packages|length }})</h1>
     <div class="filter-container">
-        <form action="{{ path('app_package_index', app.request.query.all) }}" method="get">
+        <form action="{{ path('app_package_index', app.request.query.all) }}" method="get" id="form-category" class="categories-select">
+            <label>Categories :</label>
             <select name="category" id="category">
                 <option value="all" selected>-- All categories --</option>
                 {% for category in categories %}
@@ -13,7 +14,7 @@
                 {% endfor %}
             </select>
             <input type="hidden" name="display" value="{{ display }}">
-            <button type="submit">Filter</button>
+            {# <button type="submit">blablabla</button> #}
         </form>
         <div class="display-switcher">
             <a href="?{% if selectedCategory %}category={{ selectedCategory }}&{% endif %}display=list" {% if display == "list" %}class="active"{% endif %}>

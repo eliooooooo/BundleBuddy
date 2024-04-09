@@ -11,7 +11,11 @@ async function copyToClipboard(element) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('copy').addEventListener('click', function() {
-        copyToClipboard('#install');
-    });
+    let copy = document.getElementById('copy');
+
+    if (copy) {
+        copy.addEventListener('click', function() {
+            copyToClipboard('#install');
+        });
+    }
 });

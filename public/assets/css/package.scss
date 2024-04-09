@@ -127,7 +127,7 @@
 }
 
 .filter-container {
-    @apply flex flex-row gap-4 justify-end items-center py-4;
+    @apply flex flex-row gap-4 justify-end items-end py-4;
     .display-switcher {
         @apply flex flex-row justify-end border border-solid border-gray-200 rounded-md;
         a {
@@ -146,6 +146,15 @@
             svg {
                 @apply relative top-[2px];
             }
+        }
+    }
+    .categories-select {
+        @apply flex flex-col;
+        label {
+            @apply text-gray-500 text-sm;
+        }
+        select {
+            @apply p-[9px] bg-white border border-solid border-gray-200 rounded-md; 
         }
     }
 }
