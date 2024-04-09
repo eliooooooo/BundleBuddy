@@ -7,6 +7,7 @@ use Michelf\Markdown;
 use App\Entity\Package;
 use App\Form\PackageType;
 use App\Repository\PackageRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,14 +18,28 @@ use Symfony\Component\Routing\Attribute\Route;
 class PackageController extends AbstractController
 {
     #[Route('/', name: 'app_package_index', methods: ['GET'])]
-    public function index(PackageRepository $packageRepository, Request $request): Response
+    public function index(PackageRepository $packageRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
         $display = $request->query->get('display');
         $display = $display ? $display : 'vignette';
 
+        $selectedCategory = $request->query->get('category');
+        $selectedCategory = $selectedCategory ? $selectedCategory : 'all';
+
+        $categories = $categoryRepository->findAllCategories();
+
+        if ($selectedCategory == 'all') {
+            $packages = $packageRepository->findAll();
+        } else {
+            $packages = $packageRepository->getPackageByCategory($selectedCategory);
+            // dd($packages);
+        }
+        
         return $this->render('package/index.html.twig', [
-            'packages' => $packageRepository->findAll(),
-            'display' => $display
+            'packages' => $packages,
+            'display' => $display,
+            'categories' => $categories,
+            'selectedCategory' => $selectedCategory
         ]);
     }
 

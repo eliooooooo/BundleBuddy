@@ -45,4 +45,12 @@ class CategoryRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findAllCategories(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.id, c.name')
+            ->getQuery()
+            ->getResult();
+    }
 }

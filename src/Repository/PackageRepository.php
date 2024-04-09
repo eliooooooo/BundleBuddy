@@ -45,4 +45,17 @@ class PackageRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function getPackageByCategory($category)
+    {
+        $query = $this->createQueryBuilder('p');
+
+        if ($category != 'all') {
+            $query->join('p.category', 'c')
+                ->andWhere('c.id = :category')
+                ->setParameter('category', $category);
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }
