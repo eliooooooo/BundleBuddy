@@ -46,7 +46,20 @@ class PackageRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function getPackageByCategory($category)
+    // public function getPackageByCategory($category)
+    // {
+    //     $query = $this->createQueryBuilder('p');
+
+    //     if ($category != 'all') {
+    //         $query->join('p.category', 'c')
+    //             ->andWhere('c.id = :category')
+    //             ->setParameter('category', $category);
+    //     }
+
+    //     return $query->getQuery()->getResult();
+    // }
+
+    public function getPackageByFilters($category, $language)
     {
         $query = $this->createQueryBuilder('p');
 
@@ -55,7 +68,32 @@ class PackageRepository extends ServiceEntityRepository
                 ->andWhere('c.id = :category')
                 ->setParameter('category', $category);
         }
+        if ($language != 'all') {
+            $query->andWhere('p.language = :language')
+                ->setParameter('language', $language);
+        }
 
         return $query->getQuery()->getResult();
     }
+
+    public function findAllLanguages()
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p.language')
+            ->distinct();
+
+        return $query->getQuery()->getResult();
+    }
+
+    // public function getPackageByLanguage($lang)
+    // {
+    //     $query = $this->createQueryBuilder('p');
+
+    //     if ($lang != 'all') {
+    //         $query->andWhere('p.language = :lang')
+    //             ->setParameter('lang', $lang);
+    //     }
+
+    //     return $query->getQuery()->getResult();
+    // }
 }

@@ -25,21 +25,25 @@ class PackageController extends AbstractController
 
         $selectedCategory = $request->query->get('category');
         $selectedCategory = $selectedCategory ? $selectedCategory : 'all';
+        $selectedLanguage = $request->query->get('language');
+        $selectedLanguage = $selectedLanguage ? $selectedLanguage : 'all';
 
         $categories = $categoryRepository->findAllCategories();
+        $languages = $packageRepository->findAllLanguages();
 
-        if ($selectedCategory == 'all') {
+        if ($selectedCategory == 'all' && $languages == 'all') {
             $packages = $packageRepository->findAll();
         } else {
-            $packages = $packageRepository->getPackageByCategory($selectedCategory);
-            // dd($packages);
+            $packages = $packageRepository->getPackageByFilters($selectedCategory, $selectedLanguage);
         }
         
         return $this->render('package/index.html.twig', [
             'packages' => $packages,
+            'languages' => $languages,
             'display' => $display,
             'categories' => $categories,
-            'selectedCategory' => $selectedCategory
+            'selectedCategory' => $selectedCategory,
+            'selectedLanguage' => $selectedLanguage
         ]);
     }
 

@@ -5,7 +5,7 @@
 
 ## Les fonctionnalités à développer pour les visiteurs :
 
-- [ ] Parcourir les produits en filtrant les données
+- [x] Parcourir les produits en filtrant les données
 - [x] Voir les produits sous forme de liste ou vignettes
 - [x] Voir le détail d'un produit sélectionné
 - [x] Ajouter un produit à son panier

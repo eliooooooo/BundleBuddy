@@ -148,13 +148,27 @@
             }
         }
     }
-    .categories-select {
-        @apply flex flex-col;
-        label {
-            @apply text-gray-500 text-sm;
+    #form-filter {
+        @apply flex flex-row gap-4 items-end;
+        .group-form {
+            @apply flex flex-col;
+            label {
+                @apply text-gray-500 text-sm;
+            }
+            select {
+                @apply p-[9px] bg-white border border-solid border-gray-200 rounded-md cursor-pointer; 
+            }
         }
-        select {
-            @apply p-[9px] bg-white border border-solid border-gray-200 rounded-md; 
+        button[type="submit"] {
+            @apply p-[10px] text-white cursor-pointer border border-solid h-fit border-gray-200 rounded-md transition-all;
+            background-color: rgba(216,58,36,1);
+            &:hover {
+                @apply bg-white;
+                color: rgba(216,58,36,0.75);
+            }
+        }
+        .separation {
+            @apply border border-solid border-gray-200 h-[34px];
         }
     }
 }
