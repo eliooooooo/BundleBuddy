@@ -1,5 +1,5 @@
 .container-page {
-    @apply mx-auto md:max-w-[980px] lg:max-w-[1200px] xl:max-w-[1400px];
+    @apply mx-auto max-w-full sm:max-w-[680px] md:max-w-[860px] lg:max-w-[960px] xl:max-w-[1080px];
     .container {
         @apply px-4;
     }

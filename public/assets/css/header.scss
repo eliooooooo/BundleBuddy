@@ -6,7 +6,7 @@
         background: linear-gradient(90deg, rgba(230,220,130,1) 0%, rgba(216,58,36,1) 35%, rgba(230,220,130,1) 100%);
     }
     .containerMenu {
-        @apply flex flex-row w-full justify-between h-[72px];
+        @apply flex flex-row w-full justify-between h-[72px] max-w-full sm:max-w-[680px] md:max-w-[860px] lg:max-w-[960px] xl:max-w-[1080px];
         nav {
             @apply flex items-center;
         }
