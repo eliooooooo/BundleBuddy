@@ -113,6 +113,8 @@ class PanierController extends AbstractController
     #[Route('/{id}/edit', name: 'app_panier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(PanierType::class, $panier);
         $form->handleRequest($request);
 

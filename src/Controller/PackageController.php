@@ -50,6 +50,8 @@ class PackageController extends AbstractController
     #[Route('/new', name: 'app_package_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $package = new Package();
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
@@ -87,20 +89,31 @@ class PackageController extends AbstractController
     {
         $client = new Client();
 
-        $url = $package->getRepository();
-        $parsedUrl = parse_url($url);
-        $path = $parsedUrl['path'];
-        $segments = explode('/', $path);
-
-        $user = $segments[1];
-        $repo = $segments[2];
-
-        $response = $client->request('GET', 'https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/README.md');
+        try {
+            $url = $package->getRepository();
+            $parsedUrl = parse_url($url);
+            $path = $parsedUrl['path'];
+            $segments = explode('/', $path);
     
-        $markdown = $response->getBody()->getContents();
-        $html = Markdown::defaultTransform($markdown);
-        $html = preg_replace('/src="(\.\/[^"]*)"/', 'src="https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/$1"', $html);
-        $html = preg_replace('/srcset="(\.\/[^"]*)"/', 'src="https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/$1"', $html);
+            $user = $segments[1];
+            $repo = $segments[2];
+    
+            try {
+                $response = $client->request('GET', 'https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/README.md');
+            } catch (\Exception $e) {
+                $response = $client->request('GET', 'https://raw.githubusercontent.com/' . $user . '/' . $repo . '/master/README.md');
+            }
+        
+            $markdown = $response->getBody()->getContents();
+            $html = Markdown::defaultTransform($markdown);
+            $html = preg_replace('/src="(\.\/[^"]*)"/', 'src="https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/$1"', $html);
+            $html = preg_replace('/srcset="(\.\/[^"]*)"/', 'src="https://raw.githubusercontent.com/' . $user . '/' . $repo . '/main/$1"', $html);
+        } catch (\Exception $e) {
+            return $this->render('package/show.html.twig', [
+                'package' => $package,
+                'readme' => null,
+            ]);
+        }
 
         return $this->render('package/show.html.twig', [
             'package' => $package,
@@ -111,6 +124,8 @@ class PackageController extends AbstractController
     #[Route('/{id}/edit', name: 'app_package_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Package $package, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
     
@@ -145,6 +160,8 @@ class PackageController extends AbstractController
     #[Route('/{id}', name: 'app_package_delete', methods: ['POST'])]
     public function delete(Request $request, Package $package, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$package->getId(), $request->request->get('_token'))) {
             if (file_exists('uploads/' . $package->getImage()))
                 unlink('uploads/' . $package->getImage());

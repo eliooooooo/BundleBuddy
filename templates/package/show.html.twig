@@ -18,8 +18,8 @@
                 <p>{{ package.description }}</p>
                 <p>Language : <span class="language">{{ (package.language|first|upper ~ package.language|slice(1)) }}</span></p>
                 <p>Size : <span class="size">{{ package.size }} KB</span></p>
-                <p>Documentation : <br><a href="{{ package.documentation }}">{{ package.documentation }}</a></p>
-                <p>Repository : <br><a href="{{ package.repository }}">{{ package.repository }}</a></p>
+                <p>Documentation : <br><a href="{{ package.documentation }}" target="_blank">{{ package.documentation }}</a></p>
+                <p>Repository : <br><a href="{{ package.repository }}" target="_blank">{{ package.repository }}</a></p>
                 <div class="code">
                     <code id="install">npm i {{ package.install }}</code>
                     <button class="copy" id="copy">
