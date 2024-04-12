@@ -1,0 +1,35 @@
+.container-users {
+    @apply hidden flex-row flex-wrap justify-center items-stretch gap-4;
+    .user {
+        @apply flex flex-col justify-between relative bg-white shadow-md p-4;
+        .cta {
+            @apply flex flex-col items-center gap-4 text-white p-4 w-fit no-underline shadow-md;
+            background-color: rgba(216,58,36,1);
+            /* &:hover {
+                background: linear-gradient(90deg, rgba(216,58,36,1) 50%, rgba(230,220,130,1) 100%);  
+            } */
+        }
+        .align-title {
+            h2 {
+                @apply text-2xl font-bold mt-2 mb-2;
+            }
+            @apply flex flex-row gap-4 items-center;
+        }
+        .button-admin {
+            @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md transition-all;
+            border: 1px solid black;
+            &:hover {
+                @apply bg-gray-200;
+            }
+        }
+        &.package-admin {
+            a {
+                @apply flex flex-col items-center justify-center h-full no-underline gap-4 text-black;
+            }
+        }
+    }
+}
+
+.title-users {
+    @apply hidden;
+}

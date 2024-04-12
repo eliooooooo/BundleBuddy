@@ -1,5 +1,6 @@
 import './../css/base.css';
 import './copy.js';
+import './admin.js';
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine

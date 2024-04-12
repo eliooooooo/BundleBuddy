@@ -4,6 +4,9 @@
 @import './package.scss';
 @import './panier.scss';
 @import './index.scss';
+@import './category.scss';
+@import './user.scss';
+@import './admin.scss';
 
 body, html {
     margin: 0;
