@@ -1,0 +1,12 @@
+.index-header {
+    @apply flex flex-row items-center justify-around mt-4;
+    .container-title {
+        @apply flex flex-col;
+        h1 {
+            color: rgba(216,58,36,1);
+        }
+    }
+    .index-image {
+        @apply max-w-[400px];
+    }
+}

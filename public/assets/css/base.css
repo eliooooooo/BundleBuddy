@@ -3,6 +3,7 @@
 @import './container.scss';
 @import './package.scss';
 @import './panier.scss';
+@import './index.scss';
 
 body, html {
     margin: 0;

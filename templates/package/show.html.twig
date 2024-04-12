@@ -16,6 +16,7 @@
                 <h2>{{ package.name }}</h2>
                 <p class="version">Version {{ package.version }}</p>
                 <p>{{ package.description }}</p>
+                <p>Language : <span class="language">{{ (package.language|first|upper ~ package.language|slice(1)) }}</span></p>
                 <p>Size : <span class="size">{{ package.size }} KB</span></p>
                 <p>Documentation : <br><a href="{{ package.documentation }}">{{ package.documentation }}</a></p>
                 <p>Repository : <br><a href="{{ package.repository }}">{{ package.repository }}</a></p>

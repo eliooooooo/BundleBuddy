@@ -1,4 +1,7 @@
 import './../css/base.css';
 import './copy.js';
 
-// console.log('test');
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+
+Alpine.start()

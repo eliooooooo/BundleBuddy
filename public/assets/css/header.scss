@@ -11,9 +11,32 @@
             @apply flex items-center;
         }
         .mainMenu {
-            @apply m-0 list-none justify-end flex flex-row gap-4 py-4 px-10 border-b-2 border-black;
+            @apply m-0 list-none justify-end flex flex-row gap-4 py-4 px-10 border-b-2 border-black relative;
+            li {
+                @apply flex items-center;
+            }
             a {
                 @apply text-black no-underline;
+            }
+            .user-list {
+                @apply relative;
+                a {
+                    @apply text-white no-underline cursor-pointer;
+                }
+                .user-tip {
+                    @apply flex flex-row text-white items-center gap-2 p-2 rounded-full cursor-pointer;
+                    background-color: rgba(216,58,36,1);
+                }
+                .user-actions {
+                    @apply flex flex-col gap-2 p-2 text-white absolute top-10 rounded-md mx-auto text-center;
+                    background-color: rgb(45, 45, 45);
+                    width: calc(100% - 16px);
+                    a {
+                        &:hover {
+                            @apply underline
+                        }
+                    }
+                }
             }
         }
     }

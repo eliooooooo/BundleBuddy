@@ -1,9 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div>
-        <h1>Welcome on Bundle Buddy !</h1>
-        <span> Creating your own npm bundle has never been easier! </span>
-        <img src="{{ asset('assets/images/Frame 3.png') }}" alt="bundle" />
+    <div class="index-header">
+        <div class="container-title">
+            <h1>Welcome on Bundle Buddy !</h1>
+            <span> Creating your own npm bundle has never been easier! </span>
+        </div>
+        <img class="index-image" src="{{ asset('assets/images/Frame 3.png') }}" alt="bundle" />
     </div>
 {% endblock %}

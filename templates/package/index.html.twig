@@ -47,39 +47,18 @@
     </div>
 
     <div class="container container-packages {% if display == 'list' %}list{% endif %}">
-    {% for package in packages %}
-        {% if display == 'vignette' %}
-            <div class="package" >
-                <img src="{{ asset('uploads/'~package.image) }}" alt="{{ package.name }}" width="100" height="100">
-                <div class="container-tip">
-                {% for category in package.category %}
-                    <span class="tip">{{ category.name }}</span>
-                {% endfor %}
-                </div>
-                <span class="align-title" ><h2>{{ package.name }}</h2> {{ package.version }} </span>
-                <p>{{ package.description|length > 120 ? package.description|slice(0, 120) ~ '...' : package.description }}</p>
-                <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Discover the package</a>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">
-                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-                        </svg>
-                    </a>
-                {% endif %}
-            </div>
-        {% else %}
-            <div class="package-list" >
-                <div class="image">
+    {% if packages %}
+        {% for package in packages %}
+            {% if display == 'vignette' %}
+                <div class="package" >
                     <img src="{{ asset('uploads/'~package.image) }}" alt="{{ package.name }}" width="100" height="100">
-                </div>
-                <div class="align">
-                    <span class="align-title" ><h2>{{ package.name }}</h2> {{ package.version }} </span>
                     <div class="container-tip">
                     {% for category in package.category %}
                         <span class="tip">{{ category.name }}</span>
                     {% endfor %}
                     </div>
-                    <p>{{ package.description|length > 250 ? package.description|slice(0, 250) ~ '...' : package.description }}</p>
+                    <span class="align-title" ><h2>{{ package.name }}</h2> {{ package.version }} </span>
+                    <p>{{ package.description|length > 120 ? package.description|slice(0, 120) ~ '...' : package.description }}</p>
                     <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Discover the package</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
@@ -89,9 +68,34 @@
                         </a>
                     {% endif %}
                 </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+            {% else %}
+                <div class="package-list" >
+                    <div class="image">
+                        <img src="{{ asset('uploads/'~package.image) }}" alt="{{ package.name }}" width="100" height="100">
+                    </div>
+                    <div class="align">
+                        <span class="align-title" ><h2>{{ package.name }}</h2> {{ package.version }} </span>
+                        <div class="container-tip">
+                        {% for category in package.category %}
+                            <span class="tip">{{ category.name }}</span>
+                        {% endfor %}
+                        </div>
+                        <p>{{ package.description|length > 250 ? package.description|slice(0, 250) ~ '...' : package.description }}</p>
+                        <a href="{{ path('app_package_show', {'id': package.id}) }}" class="cta">Discover the package</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No package found.</p>
+    {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
         <div class="package package-admin {% if display == 'list' %}package-list{% endif %}">
             <a href="{{ path('app_package_new') }}">
