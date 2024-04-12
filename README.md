@@ -1,6 +1,6 @@
 # Développer un site Web avec Symfony ayant les caractéristiques suivantes :
 - [x] Le site permet d'acheter, d'échanger ou de réserver des “produits” (chaussures, séances de yoga, location de gites, livres, services…).  
-- [ ] La table produit est en relation avec d'autres tables permettant de filtrer les données (catégories, gammes de prix, ville, mots-clés…)
+- [x] La table produit est en relation avec d'autres tables permettant de filtrer les données (catégories, gammes de prix, ville, mots-clés…)
 - [x] Les produits achetés, échangés ou réservés sont placés dans un “panier” lié à l'utilisateur connecté
 
 ## Les fonctionnalités à développer pour les visiteurs :
@@ -14,7 +14,7 @@
 
 ## Les fonctionnalités à développer pour les administrateurs :
 
-- [ ] Ajouter / éditer les produits et tables en relation
+- [x] Ajouter / éditer les produits et tables en relation
 - [x] Avoir un “back-office” avec une vue globale des choses
 - [ ] Pour chaque “produit” voir combien de fois il est commandé / acheté (sans historique)
   
