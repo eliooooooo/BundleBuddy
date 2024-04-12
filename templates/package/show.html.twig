@@ -28,7 +28,7 @@
                         </svg>
                     </button>
                 </div>
-                <a class="button" href="{{ path('app_panier_add', {'id': package.id}) }}">Add to my Bundle</a>      
+                <a class="button {% if app.user %}{% else %}disable{% endif %} " href="{% if app.user %}{{ path('app_panier_add', {'id': package.id}) }}{% else %}{% endif %}" {% if app.user %}{% else %}disable title="You must be log in to build your package"{% endif %}>Add to my Bundle</a>      
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="button-admin">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil " viewBox="0 0 16 16">

@@ -134,6 +134,10 @@
         .button {
             @apply no-underline text-white p-4 w-fit;
             background-color: rgba(216,58,36,1);
+            &.disable {
+                @apply cursor-not-allowed;
+                background-color: rgb(99, 96, 95);
+            }
         }
     }
 }

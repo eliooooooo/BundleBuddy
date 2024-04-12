@@ -1,12 +1,31 @@
 .index-header {
     @apply flex flex-row items-center justify-around mt-4;
     .container-title {
-        @apply flex flex-col;
-        h1 {
-            color: rgba(216,58,36,1);
+        @apply flex flex-col items-center justify-center;
+        img {
+            @apply mx-auto;
         }
     }
     .index-image {
         @apply max-w-[400px];
+    }
+}
+
+.cta {
+    @apply flex flex-row items-center gap-4 text-white p-4 no-underline rounded-md;
+    background-color: rgba(216, 58, 36, 1);
+}
+
+.index-content {
+    @apply relative;
+    .container-content {
+        @apply flex flex-row w-full items-center justify-around text-center bg-gray-200 mt-8 p-4 rounded-md;
+        .index-content-item {
+            @apply flex flex-col max-w-[200px] items-center justify-center;
+            svg {
+                @apply w-12 h-12;
+                color: rgba(216, 58, 36, 1);
+            }
+        }
     }
 }
