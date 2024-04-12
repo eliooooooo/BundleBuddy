@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Admin panel</h1>
+
+    <div class="admin-menu">
+        <ul>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Packages</a></li>
+            <li><a href="#">Categories</a></li>
+        </ul>
+        {% for package in packages %}
+            <p>{{ package.name }}</p>
+        {% endfor %}
+        {% for category in categories %}
+            <p>{{ category.name }}</p>
+        {% endfor %}
+        {% for user in users %}
+            <p>{{ user.username }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="admin-content">
+        {% block admin_content %}{% endblock %}
+    </div>
+
+{% endblock %}

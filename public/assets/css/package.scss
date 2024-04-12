@@ -5,6 +5,9 @@
     }
         .package {
             @apply flex flex-col justify-between relative w-[300px] bg-white shadow-md p-4;
+            img {
+                @apply mx-auto;
+            }
             .cta {
                 @apply flex flex-col items-center gap-4 text-white p-4 w-fit no-underline shadow-md;
                 background-color: rgba(216,58,36,1);
@@ -26,8 +29,11 @@
                 @apply flex flex-row gap-4 items-center;
             }
             .button-admin {
-                @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md;
+                @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md transition-all;
                 border: 1px solid black;
+                &:hover {
+                    @apply bg-gray-200;
+                }
             }
 
             &.package-admin {
@@ -66,8 +72,11 @@
                 @apply flex flex-row gap-4 items-center;
             }
             .button-admin {
-                @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md;
+                @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md transition-all;
                 border: 1px solid black;
+                &:hover {
+                    @apply bg-gray-200;
+                }
             }
 
             &.package-admin {
@@ -117,7 +126,10 @@
             }
         }
         .button-admin {
-            @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md;
+            @apply absolute top-0 right-0 m-4 w-4 h-4 text-black p-2 rounded-full bg-white shadow-md transition-all;
+            &:hover {
+                @apply bg-gray-200;
+            }
         }
         .button {
             @apply no-underline text-white p-4 w-fit;

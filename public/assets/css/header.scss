@@ -24,11 +24,14 @@
                     @apply text-white no-underline cursor-pointer;
                 }
                 .user-tip {
-                    @apply flex flex-row text-white items-center gap-2 p-2 rounded-full cursor-pointer;
+                    @apply flex flex-row text-white items-center gap-2 p-2 rounded-full cursor-pointer transition-all;
                     background-color: rgba(216,58,36,1);
+                    &:hover {
+                        background-color: rgb(136, 43, 30);
+                    }
                 }
                 .user-actions {
-                    @apply flex flex-col gap-2 p-2 text-white absolute top-10 rounded-md mx-auto text-center;
+                    @apply flex flex-col gap-2 p-2 text-white absolute top-10 rounded-md mx-auto text-center z-20;
                     background-color: rgb(45, 45, 45);
                     width: calc(100% - 16px);
                     a {

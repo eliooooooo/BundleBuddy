@@ -35,7 +35,7 @@
                                 <div class="user-actions" x-show="open" @click.away="open = false">
                                     <a href="{{ path('app_logout') }}">Log out</a>
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <a href="#">Admin panel</a>
+                                        <a href="{{ path('app_admin') }}">Admin panel</a>
                                     {% endif %}
                                 </div>
                             {% else %}
