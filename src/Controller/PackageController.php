@@ -53,18 +53,21 @@ class PackageController extends AbstractController
         $package = new Package();
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
         
             if ($image) {
-                $package->setImage("tmp"); 
+                $filename = 'image-'.$package->getId().'.'.$image->guessExtension();
+                
+                // Déplacer l'image avant de l'enregistrer dans l'entité
+                $image->move('uploads', $filename);
+    
+                // Enregistrer le nom du fichier dans l'entité
+                $package->setImage($filename);
+    
                 $entityManager->persist($package);
                 $entityManager->flush();
-
-                $filename = 'image-'.$package->getId().'.'.$image->guessExtension();
-                $package->setImage($filename);
-                $image->move('uploads', $filename);
             }
             // Enregistrement final (si aucun fichier n'est envoyé ou pour mettre à jour le nom du ficher)
             $entityManager->persist($package);
@@ -72,7 +75,7 @@ class PackageController extends AbstractController
         
             return $this->redirectToRoute('app_package_index', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->render('package/new.html.twig', [
             'package' => $package,
             'form' => $form,
@@ -110,24 +113,29 @@ class PackageController extends AbstractController
     {
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('fichier-image')->getData();
+            $image = $form->get('image')->getData();
         
             if ($image) {
-                if (file_exists('uploads/' . $package->getImage()))
-                    unlink('uploads/' . $package->getImage());
-        
+                // Supprimer l'ancienne image si elle existe
+                $oldImage = $package->getImage();
+                if ($oldImage && file_exists('uploads/' . $oldImage)) {
+                    unlink('uploads/' . $oldImage);
+                }
+    
+                // Télécharger la nouvelle image
                 $filename = 'image-'.$package->getId().'.'.$image->guessExtension();
-                $package->setImage($filename);
                 $image->move('uploads', $filename);
+                $package->setImage($filename);
             }
+    
             $entityManager->persist($package);
             $entityManager->flush();
         
             return $this->redirectToRoute('app_package_index', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->render('package/edit.html.twig', [
             'package' => $package,
             'form' => $form,

@@ -23,7 +23,7 @@
             <div class="package-list">
                 {% for package in packages %}
                     <div class="package">
-                        <img class="image" src="{{ package.image }}" alt="{{ package.name }}">
+                        <img class="image" src="{{ asset('uploads/'~package.image) }}" alt="{{ package.name }}">
                         <div class="align">
                             <h3 class="title">{{ package.name }}</h3>
                             <p>{{ package.description|length > 250 ? package.description|slice(0, 250) ~ '...' : package.description }}</p>

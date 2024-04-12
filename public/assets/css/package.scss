@@ -6,7 +6,7 @@
         .package {
             @apply flex flex-col justify-between relative w-[300px] bg-white shadow-md p-4;
             img {
-                @apply mx-auto;
+                @apply mx-auto w-auto mb-2;
             }
             .cta {
                 @apply flex flex-col items-center gap-4 text-white p-4 w-fit no-underline shadow-md;

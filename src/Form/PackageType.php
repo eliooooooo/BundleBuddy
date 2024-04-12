@@ -21,6 +21,7 @@ class PackageType extends AbstractType
             ->add('description')
             ->add('documentation')
             ->add('repository')
+            ->add('language')
             ->add('size')
             ->add('install')
             ->add('image', FileType::class, [
@@ -37,7 +38,7 @@ class PackageType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false,
             ])
