@@ -88,6 +88,11 @@ class PanierController extends AbstractController
     #[Route('/{id}', name: 'app_panier_show', methods: ['GET'])]
     public function show(Panier $panier): Response
     {
+        $user = $this->getUser();
+        if ($user->getPanier() !== $panier) {
+            return $this->redirectToRoute('app_panier_show', ['id' => $user->getPanier()->getId()], Response::HTTP_SEE_OTHER);
+        }
+
         $packages = $panier->getPackage();
         $weight = 0;
 
