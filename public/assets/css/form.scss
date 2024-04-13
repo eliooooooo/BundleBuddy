@@ -1,0 +1,19 @@
+.form-login {
+    @apply flex flex-col gap-4 items-center bg-gray-200 w-fit p-4 rounded-md shadow-md mx-auto mt-6;
+    div {
+        &.form-group {
+            @apply flex flex-col gap-2 w-full;
+            label {
+                @apply text-sm font-bold;
+            }
+            input {
+                @apply p-2 rounded-md border border-gray-300;
+                width: calc(100% - 16px);
+            }
+        }
+    }
+    button[type="submit"] {
+        @apply p-2 text-white rounded-md border-0;
+        background-color: rgba(216, 58, 36, 1);
+    }
+}

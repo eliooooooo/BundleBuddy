@@ -1,4 +1,13 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'form-login'}}) }}
+    <h1>Create new User</h1>
+    <div class="form-group">
+        {{ form_label(form.username, 'Username', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.password, 'Password', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button class="btn" type="submit">{{ button_label|default('Sign up') }}</button>
+    <a href="{{ path('app_login') }}">Sign in</a>
 {{ form_end(form) }}

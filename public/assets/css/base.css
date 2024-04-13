@@ -7,6 +7,7 @@
 @import './category.scss';
 @import './user.scss';
 @import './admin.scss';
+@import './form.scss';
 
 body, html {
     margin: 0;
