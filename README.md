@@ -16,7 +16,7 @@
 
 - [x] Ajouter / éditer les produits et tables en relation
 - [x] Avoir un “back-office” avec une vue globale des choses
-- [ ] Pour chaque “produit” voir combien de fois il est commandé / acheté (sans historique)
+- [x] Pour chaque “produit” voir combien de fois il est commandé / acheté (sans historique)
   
 ## Mise en production :
 
