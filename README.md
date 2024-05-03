@@ -1,4 +1,9 @@
-# Développer un site Web avec Symfony ayant les caractéristiques suivantes :
+# Bundle Buddy 🤖
+
+Bundle buddy est un site regroupant différents packages npm. Il est possible d'ajouter ces packages à son bundle afin de construire son fichier `package.json` et installer ses différentes dépendances (fonctionnalité nécessitant un compte utilisateur).
+
+Le site à été développé selon ce cahier des charges, dans le but de découvrir le développement symfony :
+## Le site Symfony :
 - [x] Le site permet d'acheter, d'échanger ou de réserver des “produits” (chaussures, séances de yoga, location de gites, livres, services…).  
 - [x] La table produit est en relation avec d'autres tables permettant de filtrer les données (catégories, gammes de prix, ville, mots-clés…)
 - [x] Les produits achetés, échangés ou réservés sont placés dans un “panier” lié à l'utilisateur connecté
@@ -20,6 +25,4 @@
   
 ## Mise en production :
 
-- [ ] Le site doit être en ligne sur mmi-unistra.fr
-
-Rendu dimanche 14 avril 2024 à 23h59
+- [x] Le site doit être en ligne sur mmi-unistra.fr
